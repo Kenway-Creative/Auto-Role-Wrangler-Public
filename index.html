@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Role Wrangler — an AI-assisted career intelligence and application automation platform. Interactive demonstration using synthetic data.">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#10192d">
+  <title>Role Wrangler | AI Job Search Command Centre</title>
+  <style>
+    :root{color-scheme:dark;--bg:#080e1a;--panel:#111b30;--panel2:#17243a;--line:#293650;--muted:#9eabc1;--text:#f4f7ff;--mint:#76e4bf;--blue:#89b9ff;--orange:#ffc982}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 81% 0%,#18345a 0,#080e1a 34%);color:var(--text);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+    a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(--mint);outline-offset:3px}
+    .wrap{max-width:1210px;padding:0 28px;margin:0 auto}.top{border-bottom:1px solid var(--line);backdrop-filter:blur(10px);background:#0b1427be;position:sticky;top:0;z-index:3}
+    .nav{min-height:70px;display:flex;justify-content:space-between;align-items:center;gap:20px}.brand{font-weight:850;letter-spacing:-.6px;font-size:21px}.brand b{color:var(--mint)}.navlinks{display:flex;gap:27px;color:var(--muted);font-weight:600;font-size:13px}.navlinks a:hover{color:var(--mint)}
+    .pill{background:#76e4bf18;color:var(--mint);border:1px solid #76e4bf55;padding:6px 11px;border-radius:100px;font-weight:700;font-size:12px;letter-spacing:.02em}
+    .hero{display:flex;justify-content:space-between;align-items:flex-end;gap:26px;padding:65px 0 29px}.eyebrow{font-size:11px;letter-spacing:.17em;text-transform:uppercase;color:var(--mint);font-weight:800}.hero h1{font-size:clamp(33px,4.4vw,55px);line-height:1.05;letter-spacing:-2px;margin:12px 0 12px;max-width:720px}.hero p{color:var(--muted);max-width:610px;margin:0;font-size:16px}.hero aside{text-align:right;white-space:nowrap;color:var(--muted);font-size:12px}.demo{margin:14px 0 0;display:inline-block;color:var(--orange);font-size:12px}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:linear-gradient(150deg,#15213a,#111a2c);border:1px solid var(--line);border-radius:17px;padding:23px;box-shadow:0 8px 24px #0002}
+    .stat-label{color:var(--muted);font-size:12px;font-weight:650}.stat{font-size:38px;letter-spacing:-1.5px;font-weight:800;line-height:1.35}.stat-detail{color:var(--mint);font-size:12px}.layout{display:grid;grid-template-columns:1.65fr 1fr;gap:16px;margin:17px 0}.card h2{margin:0 0 8px;font-size:19px;letter-spacing:-.4px}.sub{color:var(--muted);font-size:12px;margin-bottom:22px}.row{display:flex;align-items:center;justify-content:space-between;gap:16px}.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted)}.dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:6px}
+    .bars{display:flex;align-items:end;gap:15px;height:162px;border-bottom:1px solid var(--line);padding:12px 3px 0}.bar-group{flex:1;height:100%;display:flex;align-items:end;gap:5px}.bar{flex:1;border-radius:5px 5px 0 0;min-height:3px;transition:height .3s}.bar-a{background:#6b8fe7}.bar-b{background:var(--mint)}.bar-labels{display:flex;justify-content:space-around;color:var(--muted);font-size:11px;margin-top:11px}
+    .progress{height:9px;background:#293650;border-radius:20px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#55aeeb,var(--mint));border-radius:20px}.feature{margin:18px 0}.feature-name{font-weight:600;font-size:13px;margin-bottom:6px}.feature small{color:var(--muted)}
+    .section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:32px 0 13px}.section-head h2{font-size:22px;letter-spacing:-.6px;margin:0}.select{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:9px 12px;color:var(--text)}
+    .joblist{display:grid;gap:10px}.job{display:grid;grid-template-columns:1.5fr 1fr 1fr auto;align-items:center;gap:18px;border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:18px 22px}.job h3{margin:0 0 3px;font-size:15px}.job p{color:var(--muted);margin:0;font-size:12px}.rolemeta{color:var(--muted);font-size:12px}.salary{font-size:14px;font-weight:750}.score{color:var(--mint);font-weight:800;text-align:right}.chip{padding:5px 9px;border:1px solid #426a6c;background:#18463e;color:#9cf1d3;border-radius:7px;font-size:11px;font-weight:750}.chip.hold{color:var(--orange);border-color:#7e5b3f;background:#51391f}.chip.block{color:#b5c6ea;border-color:#48618a;background:#283953}
+    .timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0 50px}.timeline article{background:var(--panel);border:1px solid var(--line);padding:20px;border-radius:14px}.step{color:var(--mint);font-size:12px;font-weight:800;margin-bottom:8px}.timeline h3{margin:0 0 7px;font-size:16px}.timeline p{font-size:13px;color:var(--muted);margin:0}
+    .notes{background:#172035;border:1px solid var(--line);border-radius:13px;padding:20px 24px;margin:18px 0 25px}.notes strong{color:var(--orange)}footer{border-top:1px solid var(--line);padding:30px 0 50px;color:var(--muted);font-size:12px}
+    @media(max-width:800px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.job{grid-template-columns:1fr 1fr}.timeline{grid-template-columns:1fr}.hero{padding-top:39px}.hero aside{display:none}}
+    @media(max-width:500px){.wrap{padding:0 16px}.navlinks{gap:12px;font-size:11px}.navlinks a:nth-child(2){display:none}.stats{gap:8px}.card{padding:16px}.stat{font-size:30px}.job{gap:10px;padding:16px}.score{text-align:left}}
+  </style>
+</head>
+<body>
+<header class="top"><nav class="wrap nav" aria-label="Main navigation"><a class="brand" href="#top">ROLE<b>WRANGLER</b><span style="color:var(--muted)">.</span></a><div class="navlinks"><a href="#dashboard">Dashboard</a><a href="#opportunities">Opportunities</a><a href="#architecture">How it works</a></div><span class="pill">PORTFOLIO DEMO</span></nav></header>
+<main class="wrap" id="top">
+  <div class="hero"><div><div class="eyebrow">AI CAREER INTELLIGENCE / AUTOMATION</div><h1>The intelligent way to<br>hunt for your next role.</h1><p>Discover better opportunities. Research realistic compensation. Match genuine experience to suitable roles. Track applications from discovery to decision.</p><span class="demo">◆ All vacancy records, figures and statuses below are fictional demonstration data.</span></div><aside><span class="pill">SANITISED DEMONSTRATION</span><p>Built with Python · Supabase · GitHub Actions · Playwright</p></aside></div>
+  <section id="dashboard" class="stats" aria-label="Demonstration metrics">
+    <div class="card"><div class="stat-label">Opportunities scanned</div><div class="stat" id="stat-scanned">128</div><div class="stat-detail">Across multiple ATS sources</div></div>
+    <div class="card"><div class="stat-label">Strong matches</div><div class="stat" id="stat-matches">24</div><div class="stat-detail">Ranked against user preferences</div></div>
+    <div class="card"><div class="stat-label">Applications tracked</div><div class="stat" id="stat-applications">8</div><div class="stat-detail">Example lifecycle records</div></div>
+    <div class="card"><div class="stat-label">Recruiter responses</div><div class="stat" id="stat-responses">3</div><div class="stat-detail">Illustrative outcomes</div></div>
+  </section>
+  <section class="layout" aria-label="Analytics and product capabilities">
+    <div class="card"><div class="row"><h2>Opportunity intelligence</h2><div class="legend"><span><i class="dot" style="background:#6b8fe7"></i>Discovered</span><span><i class="dot" style="background:#76e4bf"></i>Qualified</span></div></div><p class="sub">Sample six-week trend showing automated scanning and suitability filters.</p><div class="bars" id="bars" role="img" aria-label="Illustrative weekly discovered and qualified role counts"></div><div class="bar-labels"><span>Week 1</span><span>Week 2</span><span>Week 3</span><span>Week 4</span><span>Week 5</span><span>Week 6</span></div></div>
+    <div class="card"><h2>Automation readiness</h2><p class="sub">A product capability map, not live system status.</p><div class="feature"><div class="row feature-name"><span>Role discovery and deduplication</span><small>Prototype</small></div><div class="progress"><div class="fill" style="width:95%"></div></div></div><div class="feature"><div class="row feature-name"><span>Compensation and role matching</span><small>Prototype</small></div><div class="progress"><div class="fill" style="width:75%"></div></div></div><div class="feature"><div class="row feature-name"><span>Verified answer bank</span><small>Prototype</small></div><div class="progress"><div class="fill" style="width:70%"></div></div></div><div class="feature"><div class="row feature-name"><span>Form adapter verification</span><small>In development</small></div><div class="progress"><div class="fill" style="width:35%"></div></div></div><div class="feature"><div class="row feature-name"><span>Confirmed unattended submission</span><small>Not live</small></div><div class="progress"><div class="fill" style="width:8%"></div></div></div></div>
+  </section>
+  <section id="opportunities"><div class="section-head"><div><h2>Role intelligence</h2><div class="sub" style="margin:0">Explore synthetic examples of the qualification pipeline.</div></div><label><span class="sr-only" style="position:absolute;left:-9999px">Filter vacancies</span><select class="select" id="filter"><option value="all">All decisions</option><option value="qualified">Qualified</option><option value="review">Needs review</option><option value="rejected">Rejected</option></select></label></div><div class="joblist" id="jobs"></div></section>
+  <section id="architecture"><div class="section-head"><div><h2>Designed for end-to-end automation</h2><p class="sub" style="margin:0">One connected engine, from job discovery to audit trail.</p></div></div><div class="timeline"><article><div class="step">01 — DISCOVER</div><h3>Source-aware job collection</h3><p>Collect employer ATS vacancies, deduplicate roles and preserve provenance for salary and location claims.</p></article><article><div class="step">02 — QUALIFY</div><h3>Human-verified truth</h3><p>Score genuine fit using a private applicant profile and verified answer bank. Hold uncertain claims.</p></article><article><div class="step">03 — APPLY & TRACK</div><h3>Guarded automation</h3><p>Inspect forms, attach an unchanged CV, respect application limits and require reliable confirmation receipts.</p></article></div></section>
+  <div class="notes"><strong>Privacy-first demonstration.</strong> This is a static portfolio experience, not a live applicant dashboard. It contains no real candidates, CVs, application answers, client details, authentication tokens, employer activity or Supabase connections. The private automation service and multi-user commercial concept are separate tracks.</div>
+</main>
+<footer><div class="wrap row"><span>Role Wrangler · AI-assisted sales role intelligence · Portfolio concept</span><span>Demo data only · No accounts required</span></div></footer>
+<script>
+(function(){
+  "use strict";
+  const jobs=[
+    {title:"Commercial Account Executive",company:"Northstar Cloud · B2B SaaS",place:"UK Remote",salary:"£55k base / £110k OTE",score:94,status:"qualified"},
+    {title:"Mid-Market Account Executive",company:"Beacon Analytics · Data",place:"Hybrid · Midlands",salary:"£48k base / £85k OTE",score:89,status:"qualified"},
+    {title:"Growth Account Manager",company:"Harbour Systems · Software",place:"UK Remote",salary:"£43k base / £75k OTE",score:83,status:"review"},
+    {title:"Enterprise Sales Executive",company:"FutureGrid · Infrastructure",place:"London Office",salary:"£38k base / £100k OTE",score:71,status:"review"},
+    {title:"Account Executive, Americas",company:"Summit Labs · AI",place:"US Only",salary:"USD salary",score:18,status:"rejected"}
+  ];
+  const statusLabels={qualified:"Qualified",review:"Needs review",rejected:"Rejected"};
+  function render(filter){const root=document.getElementById("jobs");root.replaceChildren();
+    jobs.filter(j=>filter==="all"||j.status===filter).forEach(j=>{
+      const el=document.createElement("article");el.className="job";
+      const left=document.createElement("div");const h=document.createElement("h3");h.textContent=j.title;const p=document.createElement("p");p.textContent=j.company;left.append(h,p);
+      const place=document.createElement("div");place.className="rolemeta";place.textContent=j.place;
+      const money=document.createElement("div");money.className="salary";money.textContent=j.salary;
+      const right=document.createElement("div");right.className="score";const value=document.createElement("div");value.textContent=j.score+"/100";const chip=document.createElement("span");chip.className="chip "+(j.status==="review"?"hold":j.status==="rejected"?"block":"");chip.textContent=statusLabels[j.status];right.append(value,chip);el.append(left,place,money,right);root.append(el);
+    });
+  }
+  document.getElementById("filter").addEventListener("change",e=>render(e.target.value));render("all");
+  const points=[[12,3],[18,5],[15,4],[25,8],[27,11],[31,14]];const bars=document.getElementById("bars");
+  points.forEach(p=>{const group=document.createElement("div");group.className="bar-group";p.forEach((n,i)=>{const bar=document.createElement("div");bar.className="bar "+(i?"bar-b":"bar-a");bar.style.height=(n/34*100)+"%";bar.title=n+(i?" qualified roles":" discovered roles");group.append(bar)});bars.append(group)});
+})();
+</script>
+</body></html>
