@@ -1,0 +1,43 @@
+name: Deploy Role Wrangler showcase
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Privacy guard for public output
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          content = Path("index.html").read_text(encoding="utf-8")
+          forbidden = ("george@kenning.ltd", "George Matthew Kenning",
+                       "07856 917763", "SUPABASE_SECRET_KEY",
+                       "SUPABASE_SUPER_SECRET_KEY", "application_answer_bank",
+                       "pektkqtpstpnkskvphmf")
+          for word in forbidden:
+              assert word.lower() not in content.lower(), "Public asset contains forbidden private data"
+          assert "fictional demonstration data" in content.lower()
+          print("Public-demo privacy checks passed")
+          PY
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      - id: deployment
+        uses: actions/deploy-pages@v4
